@@ -1,0 +1,19 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/detail/detail"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "usingComponents": {
+    "page-head": "/components/page-head",
+    "page-foot": "/components/page-foot",
+    "u-link": "/components/uLink",
+    "uni-tag": "/components/uni-tag/uni-tag"
+  }
+}

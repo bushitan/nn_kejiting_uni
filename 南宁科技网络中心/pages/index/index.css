@@ -1,0 +1,30 @@
+
+.container{
+	background-color: #888888;
+	height: calc(100vh - 50px );
+}
+.flex{
+	display: flex;
+	justify-content: center;
+}
+
+.swiper_img,
+swiper,
+.img-view {
+	width: 750upx;
+	height: 500upx;
+}
+.page-section-title {
+	margin-top: 50upx;
+}
+
+
+.tag{
+	margin-top:5px;
+}
+.tag_node{
+	margin-right: 5px;
+}
+.uni-media-list-body{
+	height:auto !important
+}

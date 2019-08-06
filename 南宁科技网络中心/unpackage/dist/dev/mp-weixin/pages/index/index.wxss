@@ -1,0 +1,33 @@
+
+.container{
+	background-color: #888888;
+	height: calc(100vh - 50px );
+}
+.flex{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+}
+.swiper_img,
+swiper,
+.img-view {
+	width: 750rpx;
+	height: 500rpx;
+}
+.page-section-title {
+	margin-top: 50rpx;
+}
+.tag{
+	margin-top:5px;
+}
+.tag_node{
+	margin-right: 5px;
+}
+.uni-media-list-body{
+	height:auto !important
+}
