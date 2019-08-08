@@ -6,6 +6,10 @@
 	export default {
 		name: 'UniTag',
 		props: {
+			id: { // 标签类型default、primary、success、warning、danger、royal
+				type: Number,
+				default: -1
+			},
 			type: { // 标签类型default、primary、success、warning、danger、royal
 				type: String,
 				default: 'default'
@@ -40,7 +44,8 @@
 				if (this.disabled) {
 					return
 				}
-				this.$emit('click')
+				// console.log(this)
+				this.$emit('click',this.id)
 			}
 		}
 	}

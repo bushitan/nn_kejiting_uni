@@ -3,28 +3,39 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "导航栏带搜索框",
-				"app-plus": {
-					"titleNView": {
-						"type": "transparent",
-						"titleColor": "#fff",
-						"backgroundColor": "#007AFF",
-						"buttons": [{
-							"fontSrc": "/static/uni.ttf",
-							"text": "\ue537",
-							"width": "40px",
-							"fontSize": "28px",
-							"color": "#fff",
-							"background": "rgba(0,0,0,0)"
-						}],
-						"searchInput": {
-							"backgroundColor": "#fff",
-							"borderRadius": "6px",
-							"placeholder": "请输入关键词，例如“2019” ",
-							"disabled": true
-						}
-					}
-				}
+				"navigationBarTitleText": "科技情报",
+				"navigationBarTextStyle":"white",
+				"navigationBarBackgroundColor":"#000000"
+				// "navigationBarTextStyle":"black",
+				// "navigationBarBackgroundColor":"#ffffff"
+				// "app-plus": {
+				// 	"titleNView": {
+				// 		"titleColor": "#fff",
+				// 		"backgroundColor": "#007AFF",
+				// 		"buttons": [{
+				// 			"fontSrc": "/static/uni.ttf",
+				// 			"text": "\ue537",
+				// 			"width": "auto",
+				// 			"fontSize": "28px",
+				// 			"color": "#fff"
+				// 		}],
+				// 		
+				// 	}
+				// }
+			}
+		},{
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"navigationBarTextStyle":"black",
+				"navigationBarBackgroundColor":"#ffffff"
+			}
+		},{
+			"path": "pages/article/article",
+			"style": {
+				"navigationBarTitleText": "文章详情",
+				"navigationBarTextStyle":"black",
+				"navigationBarBackgroundColor":"#FFFFFF"
 			}
 		},{
 			"path": "pages/detail/detail",
@@ -57,5 +68,24 @@
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#888888",
+		"selectedColor": "#007AFF",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/images/tabbar5_1.png",
+				"selectedIconPath": "static/images/tabbar5-actived.png",
+				"text": "科技项目"
+			},
+			{
+				"pagePath": "pages/user/user",
+				"iconPath": "static/images/tabbar4_1.png",
+				"selectedIconPath": "static/images/tabbar4-actived.png",
+				"text": "我的"
+			}
+		]
 	}
 }

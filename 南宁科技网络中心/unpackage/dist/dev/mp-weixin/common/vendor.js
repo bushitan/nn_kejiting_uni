@@ -11,7 +11,9 @@
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
 var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 5));
 var _db = _interopRequireDefault(__webpack_require__(/*! ./db/db.js */ 11));
-var _code = _interopRequireDefault(__webpack_require__(/*! ./db/code.js */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var pageHead = function pageHead() {return __webpack_require__.e(/*! import() | components/page-head */ "components/page-head").then(__webpack_require__.bind(null, /*! ./components/page-head.vue */ 31));};var pageFoot = function pageFoot() {return __webpack_require__.e(/*! import() | components/page-foot */ "components/page-foot").then(__webpack_require__.bind(null, /*! ./components/page-foot.vue */ 36));};var uLink = function uLink() {return __webpack_require__.e(/*! import() | components/uLink */ "components/uLink").then(__webpack_require__.bind(null, /*! @/components/uLink.vue */ 43));};var uniTag = function uniTag() {return __webpack_require__.e(/*! import() | components/uni-tag/uni-tag */ "components/uni-tag/uni-tag").then(__webpack_require__.bind(null, /*! @/components/uni-tag/uni-tag.vue */ 52));};
+var _code = _interopRequireDefault(__webpack_require__(/*! ./db/code.js */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var pageHead = function pageHead() {return __webpack_require__.e(/*! import() | components/page-head */ "components/page-head").then(__webpack_require__.bind(null, /*! ./components/page-head.vue */ 47));};var pageFoot = function pageFoot() {return __webpack_require__.e(/*! import() | components/page-foot */ "components/page-foot").then(__webpack_require__.bind(null, /*! ./components/page-foot.vue */ 52));};var uLink = function uLink() {return __webpack_require__.e(/*! import() | components/uLink */ "components/uLink").then(__webpack_require__.bind(null, /*! @/components/uLink.vue */ 59));};var uniTag = function uniTag() {return __webpack_require__.e(/*! import() | components/uni-tag/uni-tag */ "components/uni-tag/uni-tag").then(__webpack_require__.bind(null, /*! @/components/uni-tag/uni-tag.vue */ 64));};var uniLoadMore = function uniLoadMore() {return __webpack_require__.e(/*! import() | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then(__webpack_require__.bind(null, /*! @/components/uni-load-more/uni-load-more.vue */ 71));};var xxTab = function xxTab() {return __webpack_require__.e(/*! import() | components/xx_tab/xx_tab */ "components/xx_tab/xx_tab").then(__webpack_require__.bind(null, /*! @/components/xx_tab/xx_tab.vue */ 78));};var uniIcon = function uniIcon() {return __webpack_require__.e(/*! import() | components/uni-icon/uni-icon */ "components/uni-icon/uni-icon").then(__webpack_require__.bind(null, /*! @/components/uni-icon/uni-icon.vue */ 85));};
+
+
 
 
 
@@ -22,13 +24,39 @@ _vue.default.config.productionTip = false;
 _vue.default.prototype.$db = _db.default;
 _vue.default.prototype.$CODE = _code.default;
 
+function setData(obj) {
+  var that = this;
+  var keys = [];
+  var val, data;
+  Object.keys(obj).forEach(function (key) {
+    keys = key.split('.');
+    val = obj[key];
+    data = that.$data;
+    keys.forEach(function (key2, index) {
+      if (index + 1 == keys.length) {
+        that.$set(data, key2, val);
+      } else {
+        if (!data[key2]) {
+          that.$set(data, key2, {});
+        }
+      }
+      data = data[key2];
+    });
+  });
+}
+_vue.default.prototype.setData = setData;
+
 // 公共组件
 _vue.default.component('page-head', pageHead);
 _vue.default.component('page-foot', pageFoot);
 _vue.default.component('uLink', uLink);
 _vue.default.component('uniTag', uniTag);
+_vue.default.component('uni-load-more', uniLoadMore);
+_vue.default.component('xx_tab', xxTab);
+_vue.default.component('uni-icon', uniIcon);
 
 _App.default.mpType = 'app';
+
 
 var app = new _vue.default(_objectSpread({},
 _App.default));
@@ -7747,6 +7775,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 
+
 {
 
   data: function data() {
@@ -7759,35 +7788,225 @@ __webpack_require__.r(__webpack_exports__);
 
       title: 'media-list',
       showImg: true,
-      list: [{
-        title: "幸福",
-        content: "能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？",
-        img: "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg?imageView2/3/w/200/h/100/q/90" },
+
+      showList: [],
+      list: [
 
       {
-        title: "木屋",
-        content: "想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖。",
-        img: "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg?imageView2/3/w/200/h/100/q/90" },
+        "id": 1,
+        "report_title": "R&D情报",
+        "download_url": "https://bigdata.kejicloud.cn/gxsti/20190804/20190804.html",
+        "report_cate": "科技项目",
+        "create_at": "2019-07-11 12:00:00",
+        "tag": ["全国", "科技预算"],
+        "hot": 1,
+        "src": "/static/self/10.jpg" },
 
       {
-        title: "CBD",
-        content: "烤炉模式的城，到黄昏，如同打翻的调色盘一般。",
-        img: "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/cbd.jpg?imageView2/3/w/200/h/100/q/90" }],
+        "id": 2,
+        "report_title": "2019年已经下达计划项目情况统计",
+        "download_url": "https://bigdata.kejicloud.cn/gxsti/20190730/index.html",
+        "report_cate": "科技项目",
+        "create_at": "2019-07-11 12:00:00",
+        "tag": ["科技项目", "立项经费"],
+        "hot": 1,
+        // "src": "https://bigdata.kejicloud.cn/gxsti/20190730/20190730.png"
+        "src": "/static/self/11.jpg" },
 
+      {
+        "id": 3,
+        "report_title": "项目合同签订情况统计报告",
+        "download_url": "https://bigdata.kejicloud.cn/gxsti/20190803/20190803.html",
+        "report_cate": "科技项目",
+        "create_at": "2019-08-03 12:00:00",
+        "tag": ["项目", "合同签订", "报告"],
+        "hot": 0,
+        // "src": "https://bigdata.kejicloud.cn/gxsti/20190803/image002.gif"
+        "src": "/static/self/12.jpg" },
+
+      {
+        "id": 4,
+        "report_title": "项目结题（验收）情况统计报告",
+        "download_url": "https://bigdata.kejicloud.cn/gxsti/20190731/20190731.html",
+        "report_cate": "科技项目",
+        "create_at": "2019-08-03 12:00:00",
+        "tag": ["项目", "验收", "结题"],
+        "hot": 0,
+        // "src": "https://bigdata.kejicloud.cn/gxsti/20190731/thumb.png"
+        "src": "/static/self/13.jpg" },
+      {
+        "id": 4,
+        "report_title": "科技厅主要人员在岗情况",
+        "download_url": "https://bigdata.kejicloud.cn/gxsti/20190807/20190807.html",
+        "report_cate": "科技项目",
+        "create_at": "2019-08-03 12:00:00",
+        "tag": ["人员", "在岗", "考勤"],
+        "hot": 0,
+        // "src": "https://bigdata.kejicloud.cn/gxsti/20190807/20190807.png"
+        "src": "/static/self/14.jpg"
+
+
+
+
+
+
+
+
+
+        // {
+        //   "id": 1,
+        //   "report_title": "2019年全国各省，自治区，直辖市科技厅预算分析简报",
+        //   "download_url": "https://bigdata.kejicloud.cn/gxsti/20190804/20190804.html",
+        //   "report_cate": "科技项目",
+        //   "create_at": "2019-07-11 12:00:00",
+        //   "tag": ["全国", "科技预算"],
+        //   "hot": 1,
+        //   "src": "/static/self/1.jpg",			
+        //   // "img": "https://bigdata.kejicloud.cn/gxsti/20190804/data/img0.png"
+        // },
+        // {
+        //   "id": 2,
+        //   "report_title": "2019年已经下达计划项目经费统计",
+        //   "download_url": "https://bigdata.kejicloud.cn/gxsti/20190730/index.html",
+        //   "report_cate": "科技项目",
+        //   "create_at": "2019-07-11 12:00:00",
+        //   "tag": ["科技项目", "立项经费"],
+        //   "hot": 1,
+        //   "src": "https://bigdata.kejicloud.cn/gxsti/20190730/data/img6.png"
+        // },
+        // {
+        //   "id": 3,
+        //   "report_title": "项目合同签订情况统计报告",
+        //   "download_url": "https://bigdata.kejicloud.cn/gxsti/20190803/20190803.html",
+        //   "report_cate": "科技项目",
+        //   "create_at": "2019-08-03 12:00:00",
+        //   "tag": ["项目", "合同签订", "报告"],
+        //   "hot": 0,
+        //   "src": "https://bigdata.kejicloud.cn/gxsti/20190803/image002.gif"
+        // },
+        // {
+        //   "id": 4,
+        //   "report_title": "项目结题（验收）情况统计报告",
+        //   "download_url": "https://bigdata.kejicloud.cn/gxsti/20190731/20190731.html",
+        //   "report_cate": "科技项目",
+        //   "create_at": "2019-08-03 12:00:00",
+        //   "tag": ["项目", "验收","结题"],
+        //   "hot": 0,
+        //   "src": "https://bigdata.kejicloud.cn/gxsti/20190731/thumb.png"
+        // }, {
+        //   "id": 5,
+        //   "report_title": "科技厅主要人员在岗情况",
+        //   "download_url": "https://bigdata.kejicloud.cn/gxsti/20190807/20190807.html",
+        //   "report_cate": "科技项目",
+        //   "create_at": "2019-08-03 12:00:00",
+        //   "tag": ["人员", "在岗", "考勤"],
+        //   "hot": 0,
+        //   "src": "https://bigdata.kejicloud.cn/gxsti/20190807/20190807.png"
+        // }
+
+
+        // {
+        // 	title: "2019年已经下达计划项目经费统计",
+        // 	content: "项目的研究成果展示？",
+        // 	img: "/static/self/1.jpg",					
+        // 	download_url: "https://bigdata.kejicloud.cn/gxsti/20190730/index.html",
+        // },
+        // {
+        // 	title: "2019年度广西新型研发机构申报工作的通知",
+        // 	content: "请各单位尽快申报",
+        // 	download_url: "https://bigdata.kejicloud.cn/gxsti/20190804/20190804.html",
+        // 	img: "/static/self/2.jpg"
+        // },
+        // {
+        // 	title: '2019年广西"十佳科普"获奖名单公布',
+        // 	content: "获奖名单公示报告",
+        // 	download_url: "https://bigdata.kejicloud.cn/gxsti/20190803/20190803.html",
+        // 	img: "/static/self/3.jpg"
+        // }
+      }],
+
+      tabID: 0,
+      tabList: [
+      { name: "全部", tab_id: 0 },
+      { name: "项目", tab_id: 1 },
+      { name: "全国", tab_id: 2 },
+      { name: "科技", tab_id: 3 },
+      { name: "考勤", tab_id: 4 }],
 
 
       showSwiper: false,
       imgUrls: [
-      'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg',
-      'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/cbd.jpg'] };
+      '/static/self/bg-poster-xs-2.png'],
+
+
+
+
+      // footer
+      status: 'more',
+      contentText: {
+        contentdown: '暂无更多信息',
+        contentrefresh: '正在加载...',
+        contentnomore: '没有更多数据了' } };
 
 
 
   },
 
   onLoad: function onLoad() {
+    this.setData({
+      showList: this.$data.list });
+
   },
-  methods: {},
+  methods: {
+    // 获取tab的事件
+    getTab: function getTab(e) {
+      console.log("fater:", e);
+    },
+
+    onClickTag: function onClickTag(e) {
+      console.log("fater:", e);
+      this.setData({ tabID: e });
+      var list = this.$data.list;
+      var temp = [];
+
+      switch (e) {
+        case 0:
+          this.setData({ showList: list });
+          break;
+        case 1:
+          temp = [list[1], list[2], list[3]];
+          this.setData({ showList: temp });
+          break;
+        case 2:
+          temp = [list[0]];
+          this.setData({ showList: temp });
+          break;
+        case 3:
+          temp = [list[0], list[1]];
+          this.setData({ showList: temp });
+          break;
+        case 4:
+          temp = [list[4]];
+          this.setData({ showList: temp });
+          break;
+        default:
+          break;}
+
+    },
+
+    // 搜索框
+    confirm: function confirm(e) {
+      console.log(e.target.value);
+    },
+
+    clickArticle: function clickArticle(e) {
+      console.log("clickArticle:", e);
+      var index = e;
+      var list = this.$data.list;
+      uni.navigateTo({
+        url: "/pages/article/article?url=" + list[index].download_url + "&title=" + list[index].report_title });
+
+    } },
 
 
   onNavigationBarSearchInputClicked: function onNavigationBarSearchInputClicked(e) {
@@ -7839,6 +8058,303 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 /* 21 */
+/*!*********************************************************************************************!*\
+  !*** C:/lab/git/nn_theatre/nn_kejiting_uni/南宁科技网络中心/main.js?{"page":"pages%2Fuser%2Fuser"} ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _user = _interopRequireDefault(__webpack_require__(/*! ./pages/user/user.vue */ 22));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_user.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+/* 22 */,
+/* 23 */,
+/* 24 */,
+/* 25 */
+/*!**************************************************************************************************!*\
+  !*** C:/lab/git/nn_theatre/nn_kejiting_uni/南宁科技网络中心/pages/user/user.js?vue&type=script&lang=js& ***!
+  \**************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_user_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./user.js?vue&type=script&lang=js& */ 26);
+/* harmony import */ var _D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_user_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_user_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_user_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_user_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_user_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+/* 26 */
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!C:/lab/git/nn_theatre/nn_kejiting_uni/南宁科技网络中心/pages/user/user.js?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  data: function data() {
+    return {
+      user: {
+        profile: 'https://via.placeholder.com/70/ffffff/808080',
+        nickname: 'Kitty Wei',
+        level: '会员',
+        tags: ['已注册', '高级会员'] },
+
+      orderList: [
+      { icon: 'yinhangka', text: '待付款', padge: 0 },
+      { icon: 'rili', text: '待收货', padge: 1 },
+      { icon: 'xiaoxi', text: '待评价', padge: 6 },
+      { icon: 'anquan', text: '退换/售后', padge: 0 }],
+
+      pocketList: [
+      { count: 1588, text: '虚拟币' },
+      { count: 70, text: '优惠券' },
+      { count: 100.9, text: '白条' },
+      { count: 99, text: '礼品卡' }],
+
+      viewList: [
+      { count: 108, text: '商品关注' },
+      { count: 56, text: '店铺关注' },
+      { count: 899, text: '喜欢的内容' },
+      { count: 1600, text: '浏览记录' }],
+
+      serviceList: [
+      { icon: 'awake', text: '我的活动' },
+      { icon: 'hotel', text: '客户服务' },
+      { icon: 'car', text: '寄件服务' },
+      { icon: 'mic', text: '我的宝宝' }],
+
+      otherServices: [
+      {
+        icon: 'mic',
+        // name: '标签',
+        title: '小标签'
+        // disc: '参加早起打卡，瓜分5亿红包参加早起打卡，瓜分5亿红包',
+      }, {
+        icon: 'hotel',
+        // name: '收藏',
+        title: '收藏'
+        // disc: '为了某种目的而设立的具有一定数量的资金',
+      }],
+
+      productList: [],
+      renderImage: false,
+      productPage: 0,
+      loadAll: false };
+
+  },
+  onLoad: function onLoad() {var _this = this;
+    this.loadData();
+    setTimeout(function () {
+      _this.renderImage = true;
+    }, 300);
+  },
+  methods: {
+    loadData: function loadData() {var _this2 = this;var action = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'add';
+      var data = [
+      {
+        image: 'https://img-cdn-qiniu.dcloud.net.cn/uploads/example/product1.jpg',
+        title: 'Apple iPhone X 256GB 深空灰色 移动联通电信4G手机',
+        originalPrice: 9999,
+        favourPrice: 8888,
+        tip: '自营' },
+
+      {
+        image: 'https://img-cdn-qiniu.dcloud.net.cn/uploads/example/product2.jpg',
+        title: 'Apple iPad 平板电脑 2018年新款9.7英寸',
+        originalPrice: 3499,
+        favourPrice: 3399,
+        tip: '优惠' },
+
+      {
+        image: 'https://img-cdn-qiniu.dcloud.net.cn/uploads/example/product3.jpg',
+        title: 'Apple MacBook Pro 13.3英寸笔记本电脑（2017款Core i5处理器/8GB内存/256GB硬盘 MupxT2CH/A）',
+        originalPrice: 12999,
+        favourPrice: 10688,
+        tip: '秒杀' },
+
+      {
+        image: 'https://img-cdn-qiniu.dcloud.net.cn/uploads/example/product4.jpg',
+        title: 'Kindle Paperwhite电纸书阅读器 电子书墨水屏 6英寸wifi 黑色',
+        originalPrice: 999,
+        favourPrice: 958,
+        tip: '秒杀' },
+
+      {
+        image: 'https://img-cdn-qiniu.dcloud.net.cn/uploads/example/product5.jpg',
+        title: '微软（Microsoft）新Surface Pro 二合一平板电脑笔记本 12.3英寸（i5 8G内存 256G存储）',
+        originalPrice: 8888,
+        favourPrice: 8288,
+        tip: '优惠' },
+
+      {
+        image: 'https://img-cdn-qiniu.dcloud.net.cn/uploads/example/product6.jpg',
+        title: 'Apple Watch Series 3智能手表（GPS款 42毫米 深空灰色铝金属表壳 黑色运动型表带 MQL12CH/A）',
+        originalPrice: 2899,
+        favourPrice: 2799,
+        tip: '自营' }];
+
+
+
+      if (action === 'refresh') {
+        this.productList = [];
+        this.productPage = 0;
+        this.loadAll = false;
+      }
+
+      data.forEach(function (item) {
+        _this2.productList.push(item);
+      });
+
+
+    } },
+
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.loadData('refresh');
+    // 实际开发中通常是网络请求，加载完数据后就停止。这里仅做演示，加延迟为了体现出效果。
+    setTimeout(function () {
+      uni.stopPullDownRefresh();
+    }, 2000);
+  },
+  onReachBottom: function onReachBottom() {
+    if (this.productPage >= 3) {//数字仅为体现效果，实际开发中数据加载完成就停止
+      this.loadAll = true;
+    } else {
+      this.productPage++;
+      this.loadData();
+    }
+  } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 27 */,
+/* 28 */,
+/* 29 */
+/*!***************************************************************************************************!*\
+  !*** C:/lab/git/nn_theatre/nn_kejiting_uni/南宁科技网络中心/main.js?{"page":"pages%2Farticle%2Farticle"} ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _article = _interopRequireDefault(__webpack_require__(/*! ./pages/article/article.vue */ 30));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_article.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */
+/*!********************************************************************************************************!*\
+  !*** C:/lab/git/nn_theatre/nn_kejiting_uni/南宁科技网络中心/pages/article/article.js?vue&type=script&lang=js& ***!
+  \********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_article_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./article.js?vue&type=script&lang=js& */ 34);
+/* harmony import */ var _D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_article_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_article_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_article_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_article_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_article_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+/* 34 */
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!C:/lab/git/nn_theatre/nn_kejiting_uni/南宁科技网络中心/pages/article/article.js?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
+
+{
+
+  data: function data() {
+    return {
+      article: {
+        title: "比赛",
+        summary: "比赛规则额",
+        date: "2019.7.2 -- 2019.7.8" },
+
+      url: "" };
+
+  },
+
+  onLoad: function onLoad(options) {
+    console.log(options);
+
+    // this.data.url = options.url
+    // this.$set(this.$data,url,options.url)
+    this.setData({ url: options.url });
+
+    uni.setNavigationBarTitle({
+      title: options.title });
+
+  },
+  methods: {
+    setData: function setData(obj) {
+      var that = this;
+      var keys = [];
+      var val, data;
+      Object.keys(obj).forEach(function (key) {
+        keys = key.split('.');
+        val = obj[key];
+        data = that.$data;
+        keys.forEach(function (key2, index) {
+          if (index + 1 == keys.length) {
+            that.$set(data, key2, val);
+          } else {
+            if (!data[key2]) {
+              that.$set(data, key2, {});
+            }
+          }
+          data = data[key2];
+        });
+      });
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 35 */
+/*!*****************************************************************************************************************!*\
+  !*** C:/lab/git/nn_theatre/nn_kejiting_uni/南宁科技网络中心/pages/article/article.css?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_article_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-1!./node_modules/css-loader??ref--6-oneOf-1-2!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./article.css?vue&type=style&index=0&lang=css& */ 36);
+/* harmony import */ var _D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_article_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_article_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_article_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_article_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_1_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_index_js_ref_6_oneOf_1_2_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_stylePostLoader_js_D_Coder_HBuilderX_2_1_3_20190723_full_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_article_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+/* 36 */
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-1!./node_modules/css-loader??ref--6-oneOf-1-2!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!C:/lab/git/nn_theatre/nn_kejiting_uni/南宁科技网络中心/pages/article/article.css?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 37 */
 /*!*************************************************************************************************!*\
   !*** C:/lab/git/nn_theatre/nn_kejiting_uni/南宁科技网络中心/main.js?{"page":"pages%2Fdetail%2Fdetail"} ***!
   \*************************************************************************************************/
@@ -7849,17 +8365,17 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _detail = _interopRequireDefault(__webpack_require__(/*! ./pages/detail/detail.vue */ 22));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _detail = _interopRequireDefault(__webpack_require__(/*! ./pages/detail/detail.vue */ 38));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_detail.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
 /***/ }),
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */
 /*!************************************************************************************!*\
   !*** C:/lab/git/nn_theatre/nn_kejiting_uni/南宁科技网络中心/components/amap-wx/js/util.js ***!
   \************************************************************************************/
@@ -7867,7 +8383,7 @@ createPage(_detail.default);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _amapWx = _interopRequireDefault(__webpack_require__(/*! @/components/amap-wx/lib/amap-wx.js */ 28));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _amapWx = _interopRequireDefault(__webpack_require__(/*! @/components/amap-wx/lib/amap-wx.js */ 44));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 // 地铁颜色图
 var line = {
   '1号线': '#C43B33',
@@ -8051,7 +8567,7 @@ util;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 28 */
+/* 44 */
 /*!****************************************************************************************!*\
   !*** C:/lab/git/nn_theatre/nn_kejiting_uni/南宁科技网络中心/components/amap-wx/lib/amap-wx.js ***!
   \****************************************************************************************/

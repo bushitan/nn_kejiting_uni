@@ -1,4 +1,6 @@
 {
-  "navigationBarTitleText": "导航栏带搜索框",
+  "navigationBarTitleText": "科技情报",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#000000",
   "usingComponents": {}
 }
