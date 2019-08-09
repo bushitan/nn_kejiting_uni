@@ -78,7 +78,7 @@
 				"pagePath": "pages/index/index",
 				"iconPath": "static/images/tabbar5_1.png",
 				"selectedIconPath": "static/images/tabbar5-actived.png",
-				"text": "科技项目"
+				"text": "科技情报"
 			},
 			{
 				"pagePath": "pages/user/user",

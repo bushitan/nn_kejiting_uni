@@ -7836,7 +7836,7 @@ __webpack_require__.r(__webpack_exports__);
         "src": "/static/self/13.jpg" },
       {
         "id": 4,
-        "report_title": "科技厅主要人员在岗情况",
+        "report_title": "科技厅处长（单位负责人）在岗信息",
         "download_url": "https://bigdata.kejicloud.cn/gxsti/20190807/20190807.html",
         "report_cate": "科技项目",
         "create_at": "2019-08-03 12:00:00",
