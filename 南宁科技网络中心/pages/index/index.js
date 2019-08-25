@@ -172,7 +172,11 @@ export default {
 				contentdown: '暂无更多信息',
 				contentrefresh: '正在加载...',
 				contentnomore: '没有更多数据了'
-			}
+			},
+			
+			swiperList:[],
+			articleList:[],
+			displayList:[],
 			
 		};
 	},
@@ -181,8 +185,44 @@ export default {
 		this.setData({
 			showList:this.$data.list
 		})
+		
+		this.$db.getIndex()
+		.then(res=>{
+			console.log(res)
+			
+			this.onInit(res)
+		})
+		.catch(res=> {
+			this.onInit(res)
+			console.log(res)
+		})
 	},
+	
 	methods: {
+		
+		onInit(res){
+			// debugger
+			var swiperList = res.data.swiper_list
+			var articleList = res.data.article_list
+			this.setData({
+				swiperList:swiperList,
+				displayList:articleList
+			})
+		},
+		clickArticle(e){
+			console.log("clickArticle:",e)
+			var index = e 
+			var list = this.$data.displayList
+			var url = list[index].url || "https://bigdata.kejicloud.cn/gxsti/20190803/20190803.html"
+			var title = list[index].title
+			uni.navigateTo({
+				url:"/pages/article/article?url=" + url + "&title=" + title
+			})
+		},
+		
+		
+		
+		
 		// 获取tab的事件
 		getTab(e){
 			console.log("fater:",e)
@@ -224,14 +264,7 @@ export default {
 			console.log(e.target.value)
 		},
 		
-		clickArticle(e){
-			console.log("clickArticle:",e)
-			var index = e 
-			var list = this.$data.list
-			uni.navigateTo({
-				url:"/pages/article/article?url=" + list[index].download_url + "&title=" + list[index].report_title
-			})
-		},
+		
 		
 	},
 	onNavigationBarSearchInputClicked(e) {

@@ -52,3 +52,26 @@ const app = new Vue({
     ...App
 })
 app.$mount()
+
+
+
+// ,
+// 	"tabBar": {
+// 		"color": "#888888",
+// 		"selectedColor": "#007AFF",
+// 		"borderStyle": "black",
+// 		"backgroundColor": "#ffffff",
+// 		"list": [{
+// 				"pagePath": "pages/index/index",
+// 				"iconPath": "static/images/tabbar5_1.png",
+// 				"selectedIconPath": "static/images/tabbar5-actived.png",
+// 				"text": "科技情报"
+// 			},
+// 			{
+// 				"pagePath": "pages/user/user",
+// 				"iconPath": "static/images/tabbar4_1.png",
+// 				"selectedIconPath": "static/images/tabbar4-actived.png",
+// 				"text": "我的"
+// 			}
+// 		]
+// 	}

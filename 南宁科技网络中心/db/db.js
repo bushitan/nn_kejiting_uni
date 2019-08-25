@@ -5,11 +5,13 @@ class db{
 	KEY_USER_INFO = "user_info"
 	KEY_UUID = "uuid"
 	
-	HOST = "https://www.51zfgx.com/dev/"
+	// HOST = "https://www.51zfgx.com/dev/"
+	HOST = "http://192.168.200.105:8000/nn_kejiting_server/"
 	URL = this.HOST + "photo/"
 	// API_LOGIN =  `${this.URL}system/set/user_info/`
 	
 	API_LOGIN = "http://nnjc.lwdweb.top/User/Login"
+	API_INDEX =  `${this.URL}article/get/list/`
 	
 	constructor(){}
 	
@@ -59,11 +61,18 @@ class db{
     login() {
         return new Promise((resolve, reject) => {
 			this.baseURL( this.API_LOGIN, { UserName: "code",Password: "123"} )
-			.then(res => resolve( res ))
-			.catch(res => reject(res))
+			.then(res => resolve( res.data ))
+			.catch(res => reject(res.data))
         })
     }
 	
+	getIndex() {
+        return new Promise((resolve, reject) => {
+			this.baseURL( this.API_INDEX )
+			.then(res => resolve( res.data ))
+			.catch(res => reject(res.data))
+        })
+    }
 	
 	getName(){
 		return "hellow"

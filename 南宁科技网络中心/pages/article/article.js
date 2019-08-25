@@ -10,6 +10,11 @@ export default {
 				date:"2019.7.2 -- 2019.7.8",
 			},
 			url:"",
+			webviewStyles: {
+				progress: {
+					color: '#FF3333'
+				}
+			}
 		};
 	},
 
