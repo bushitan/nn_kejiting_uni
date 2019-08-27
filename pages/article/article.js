@@ -9,6 +9,7 @@ export default {
 				summary:"比赛规则额",
 				date:"2019.7.2 -- 2019.7.8",
 			},
+			title:"",
 			url:"",
 			webviewStyles: {
 				progress: {
@@ -18,12 +19,26 @@ export default {
 		};
 	},
 
+	
+	onShareAppMessage(res) {
+		console.log(this.$data.url ,this.$data.title )
+	    return {
+	      title: this.$data.title,
+		  imageUrl:"/static/cover/share.jpg",
+	      path: '/pages/index/index?is_share=1&url=' + this.$data.url + "&title=" + this.$data.title
+	    }
+	},
+	
 	onLoad(options) {
+		// debugger 
 		console.log(options)
 		
 		// this.data.url = options.url
 		// this.$set(this.$data,url,options.url)
-		this.setData({url:options.url})
+		this.setData({
+			url:options.url,
+			title: options.title
+		})
 		
 		uni.setNavigationBarTitle({
 			title: options.title

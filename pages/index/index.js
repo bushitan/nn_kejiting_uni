@@ -178,24 +178,43 @@ export default {
 			articleList:[],
 			displayList:[],
 			
+			
+			isShare:false, // 默认不是分享的
 		};
 	},
 
-	onLoad() {
-		this.setData({
-			showList:this.$data.list
-		})
+	onLoad(options) {
+		
+	
+		
+		// this.setData({
+		// 	showList:this.$data.list
+		// })
 		
 		this.$db.getIndex()
 		.then(res=>{
-			console.log(res)
-			
+			console.log(res)			
 			this.onInit(res)
+			
 		})
 		.catch(res=> {
 			this.onInit(res)
 			console.log(res)
 		})
+		
+		
+		// 若是分享
+		if (options.hasOwnProperty('is_share'))
+		{
+			 this.setData({
+				isShare:true,
+				shareUrl:options.url,
+				shareTitle:options.title,
+			})
+			uni.navigateTo({
+				url:"/pages/article/article?url=" + options.url + "&title=" + options.title
+			})
+		}
 	},
 	
 	methods: {
@@ -266,6 +285,14 @@ export default {
 		
 		
 		
+	},
+	
+	onShareAppMessage(res) {
+	    return {
+	      title: '科技大数据',
+		  imageUrl:"/static/cover/share.jpg",
+	      path: '/pages/index/index'
+	    }
 	},
 	onNavigationBarSearchInputClicked(e) {
 		console.log('事件执行了')

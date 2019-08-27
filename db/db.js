@@ -5,9 +5,11 @@ class db{
 	KEY_USER_INFO = "user_info"
 	KEY_UUID = "uuid"
 	
-	// HOST = "https://www.51zfgx.com/dev/"
-	HOST = "http://192.168.200.105:8000/nn_kejiting_server/"
+	HOST = "https://www.51zfgx.com/nn_kejiting_server/"
+	// HOST = "http://192.168.200.105:8000/nn_kejiting_server/"
+	// HOST = "http://120.77.152.75:9000/nn_kejiting_server/"
 	URL = this.HOST + "photo/"
+	// URL = this.HOST
 	// API_LOGIN =  `${this.URL}system/set/user_info/`
 	
 	API_LOGIN = "http://nnjc.lwdweb.top/User/Login"
