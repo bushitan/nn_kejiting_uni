@@ -11,6 +11,7 @@ export default {
 			},
 			title:"",
 			url:"",
+			cover:"",
 			webviewStyles: {
 				progress: {
 					color: '#FF3333'
@@ -24,8 +25,9 @@ export default {
 		console.log(this.$data.url ,this.$data.title )
 	    return {
 	      title: this.$data.title,
-		  imageUrl:"/static/cover/share.jpg",
-	      path: '/pages/index/index?is_share=1&url=' + this.$data.url + "&title=" + this.$data.title
+		  // imageUrl:"/static/cover/share.jpg",
+		  imageUrl:this.$data.cover,
+	      path: '/pages/index/index?is_share=1&url=' + this.$data.url + "&title=" + this.$data.title + "&cover=" + this.$data.cover 
 	    }
 	},
 	
@@ -37,7 +39,8 @@ export default {
 		// this.$set(this.$data,url,options.url)
 		this.setData({
 			url:options.url,
-			title: options.title
+			title: options.title,
+			cover:options.cover
 		})
 		
 		uni.setNavigationBarTitle({

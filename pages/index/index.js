@@ -212,7 +212,7 @@ export default {
 				shareTitle:options.title,
 			})
 			uni.navigateTo({
-				url:"/pages/article/article?url=" + options.url + "&title=" + options.title
+				url:"/pages/article/article?url=" + options.url + "&title=" + options.title+ "&cover=" + options.cover
 			})
 		}
 	},
@@ -234,8 +234,9 @@ export default {
 			var list = this.$data.displayList
 			var url = list[index].url || "https://bigdata.kejicloud.cn/gxsti/20190803/20190803.html"
 			var title = list[index].title
+			var cover = list[index].cover
 			uni.navigateTo({
-				url:"/pages/article/article?url=" + url + "&title=" + title
+				url:"/pages/article/article?url=" + url + "&title=" + title + "&cover=" + cover
 			})
 		},
 		
