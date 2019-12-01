@@ -4,8 +4,12 @@ class db{
 	 */
 	KEY_USER_INFO = "user_info"
 	KEY_UUID = "uuid"
+	KEY_USERNAME = "username"
+	KEY_PASSWORD = "password"
+	
 	
 	HOST = "https://www.51zfgx.com/nn_kejiting_server/"
+	HOST_DIAO = "http://106.13.100.67/"
 	// HOST = "http://192.168.200.105:8000/nn_kejiting_server/"
 	// HOST = "http://120.77.152.75:9000/nn_kejiting_server/"
 	URL = this.HOST + "photo/"
@@ -29,7 +33,8 @@ class db{
                 method: options.method || "POST",
                 header: {
                     'content-type': 'application/x-www-form-urlencoded' ,// 默认值
-					'Access-Control-Allow-Origin':true,
+                    // 'content-type': 'application/json' ,// 默认值
+					// 'Access-Control-Allow-Origin':true,
                 },
                 data: data,
                 success(res) {
@@ -44,15 +49,20 @@ class db{
     }
 	
     // 获取店铺列表
-    baseURL(url,data) {
+    baseURL(url,data,method) {
         return new Promise((resolve, reject) => {
+			uni.showLoading()
             this.base({
                 url: url,
-                data:data || {}
+                data:data || {},
+				method:method
             })
-            .then(res => resolve(res))
+            .then(res => {
+				uni.hideLoading()
+				resolve(res)
+			})
             .catch(res => {
-				
+				uni.hideLoading()
 				reject(res)
 			})
         })
@@ -60,9 +70,9 @@ class db{
 	
 	/****业务详情****/
     // 1 用户登录认证
-    login() {
+    login(obj) {
         return new Promise((resolve, reject) => {
-			this.baseURL( this.API_LOGIN, { UserName: "code",Password: "123"} )
+			this.baseURL( this.HOST_DIAO + "api/employee/login/", obj ,"POST" )
 			.then(res => resolve( res.data ))
 			.catch(res => reject(res.data))
         })
@@ -76,9 +86,25 @@ class db{
         })
     }
 	
-	getName(){
-		return "hellow"
+	
+	// 1 获取考勤统计
+	getTotal(obj) {
+	    return new Promise((resolve, reject) => {
+			this.baseURL( this.HOST_DIAO + "api/attendence/gettotalstat/", obj ,"GET" )
+			.then(res => resolve( res.data ))
+			.catch(res => reject(res.data))
+	    })
 	}
+	
+	
+    // 2 获取领导考勤记录
+    getLog(obj) {
+        return new Promise((resolve, reject) => {
+			this.baseURL( this.HOST_DIAO + "api/attendence/getloglist/", obj ,"GET" )
+			.then(res => resolve( res.data ))
+			.catch(res => reject(res.data))
+        })
+    }
 	
 	
 }
