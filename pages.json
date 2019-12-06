@@ -1,13 +1,23 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		
-		// {
-		// 	"path": "pages/x_login/x_login"
-		// },
+
+		{
+			"path": "pages/route/route",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarTextStyle":"black",
+				"navigationBarBackgroundColor":"#061936"
+			}
+			
+		},	
+		{
+			"path": "pages/x_login/x_login"
+		},		
 		{
 			"path": "pages/log/log",
 			"style": {
-				"navigationBarTitleText": "我的",
+				"navigationBarTitleText": "出勤情况",
 				"navigationBarTextStyle":"black",
 				"navigationBarBackgroundColor":"#ffffff"
 			}

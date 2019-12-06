@@ -185,22 +185,22 @@ export default {
 
 	onLoad(options) {
 		
-	
+		this.onInit()
 		
 		// this.setData({
 		// 	showList:this.$data.list
 		// })
 		
-		this.$db.getIndex()
-		.then(res=>{
-			console.log(res)			
-			this.onInit(res)
-			
-		})
-		.catch(res=> {
-			this.onInit(res)
-			console.log(res)
-		})
+		// this.$db.getIndex()
+		// .then(res=>{
+		// 	console.log(res)			
+		// 	this.onInit(res)
+		// 	
+		// })
+		// .catch(res=> {
+		// 	this.onInit(res)
+		// 	console.log(res)
+		// })
 		
 		
 		// 若是分享
@@ -211,30 +211,64 @@ export default {
 				shareUrl:options.url,
 				shareTitle:options.title,
 			})
-			uni.navigateTo({
-				url:"/pages/article/article?url=" + options.url + "&title=" + options.title+ "&cover=" + options.cover
-			})
+			if(options.is_share == 1)
+				uni.navigateTo({
+					url:"/pages/article/article?url=" + options.url + "&title=" + options.title+ "&cover=" + options.cover
+				})
+			else
+				uni.navigateTo({
+					url:"/pages/log/log"
+				})
 		}
 	},
 	
 	methods: {
 		
 		onInit(res){
+			
+			// this.$db.getIndex().then(res=>{
+			this.$db.getMainInfo().then(res=>{
+				// console.log(res)			
+				// this.onInit(res)
+				var swiperList = res.data.swiper_list
+				var articleList = res.data.article_list
+				this.setData({
+					swiperList:swiperList,
+					displayList:articleList
+				})
+			})
+			.catch(res=> {
+				// this.onInit(res)
+				// console.log(res)
+			})
 			// debugger
-			var swiperList = res.data.swiper_list
-			var articleList = res.data.article_list
-			this.setData({
-				swiperList:swiperList,
-				displayList:articleList
+			// var swiperList = res.data.swiper_list
+			// var articleList = res.data.article_list
+			// this.setData({
+			// 	swiperList:swiperList,
+			// 	displayList:articleList
+			// })
+		},
+		
+		/**
+		 * @method 查看考情详情
+		 */
+		clickLog(){
+			uni.navigateTo({
+				url:"/pages/log/log"
 			})
 		},
-		clickArticle(e){
-			console.log("clickArticle:",e)
-			var index = e 
-			var list = this.$data.displayList
-			var url = list[index].url || "https://bigdata.kejicloud.cn/gxsti/20190803/20190803.html"
-			var title = list[index].title
-			var cover = list[index].cover
+		
+		clickArticle(url,title,cover){
+			// debugger
+			// console.log("clickArticle:",e)
+			// var index = e 
+			// var list = this.$data.displayList
+			// var url = list[index].url || "https://bigdata.kejicloud.cn/gxsti/20190803/20190803.html"
+			// var title = list[index].title
+			// var cover = list[index].cover
+			url = encodeURIComponent(url)
+			cover = encodeURIComponent(cover)
 			uni.navigateTo({
 				url:"/pages/article/article?url=" + url + "&title=" + title + "&cover=" + cover
 			})
@@ -292,7 +326,7 @@ export default {
 	    return {
 	      title: '科技大数据',
 		  imageUrl:"/static/cover/share.jpg",
-	      path: '/pages/index/index'
+	      path: '/pages/route/route'
 	    }
 	},
 	onNavigationBarSearchInputClicked(e) {

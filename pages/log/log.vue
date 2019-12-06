@@ -2,19 +2,24 @@
 	<view class="container">
 		<view class="box">
 			<view class="content">
-				<image class="logo" src="https://kjxcx.kejicloud.cn/gxsti/images/bg1.png" mode="widthFix"></image>				
+				<image class="logo" src="https://kjxcx.kejicloud.cn/gxsti/images/bg1.png" mode="widthFix"></image>
+								
+				<view class="date_btn">
+					<button :type="isToday?'primary':'default'" size="mini" @click="selectToday(true)">今天</button>
+					<button :type="isToday?'default':'primary'"  size="mini" @click="selectToday(false)">明天</button>
+				</view>
 				<view class="tool">
 					<view class="node">
 						日期：<view class="num">{{total.date_1}}</view>
 					</view>
 					<view class="node">
-						在邕：<view class="num">{{total.inNanNingCount_2 || 0}}</view>位
+						在邕：<view class="num">{{total.inNanNingCount_2 || 0}}</view> 位
 					</view>
 					<view class="node">
-						请假：<view class="num">{{total.leaveCount_3 || 0}}</view>位
+						请假：<view class="num">{{total.leaveCount_3 || 0}}</view> 位
 					</view>
 					<view class="node">
-						出差：<view class="num">{{total.travelCount_4 || 0}}</view>位
+						出差：<view class="num">{{total.travelCount_4 || 0}}</view> 位
 					</view>
 				</view>
 				
@@ -47,6 +52,9 @@
 					</view>
 				</view>
 			</view>
+			<view class="footer">
+				注：数据采集自科技厅OA，仅供参考，如有变动，请告知我们改正
+			</view>
 		</view>
 		
 	</view>
@@ -59,6 +67,7 @@ export default {
 		return {
 			total:{},
 			logList:[],
+			isToday:true,
 		};
 	},
 	onLoad() {
@@ -84,13 +93,45 @@ export default {
 				})
 			})
 		},
+		
+		/**
+		 * @method  选择今天
+		 */
+		selectToday(isToday){
+			this.setData({
+				isToday:isToday,
+			})
+			
+			var strdate = ""
+			if (isToday == false){
+				var tomorrow = new Date();
+				tomorrow.setTime(tomorrow.getTime()+24*60*60*1000);
+				strdate = tomorrow.getFullYear()+"-" + (tomorrow.getMonth()+1) + "-" + tomorrow.getDate();	
+			}
+			this.$db.getTotal({
+				strdate:strdate,
+			}).then(res=>{
+				this.setData({
+					total:res.data
+				})
+			})
+		},
+		
+	},
+	
+	onShareAppMessage(res) {
+	    return {
+	      title: '出勤情况',
+		  imageUrl:"/static/cover/share.jpg",
+	      path: '/pages/route/route?is_share=2&url=1&title=1&cover=1'
+	    }
 	},
 };
 </script>
 
 <style>
 	page{
-		background-color: #555;
+		background-color: #1e3e61;
 	}
 	.container{
 		padding: 15px;
@@ -112,6 +153,15 @@ export default {
 	.logo {
 		width: 100%;
 	}
+	
+	.date_btn{
+		display: flex;
+		justify-content: center;
+	}
+	.date_btn button{
+		margin: 5px;
+	}
+	
 	.tool{
 		display: flex;
 		justify-content: center;
@@ -152,5 +202,10 @@ export default {
 		font-size: 9pt;
 		color: #888;
 		
+	}
+	
+	.footer{
+		font-size: 8pt;
+		color: #888;
 	}
 </style>

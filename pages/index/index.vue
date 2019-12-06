@@ -4,8 +4,25 @@
 			<swiper-item v-for="(img, key) in swiperList" :key="key"><image :src="img.url"  class="swiper_img" /></swiper-item>
 		</swiper>
 		<view class="uni-list">
+			
+			<view class="uni-list-cell" hover-class="uni-list-cell-hover"  >
+				<view class="uni-media-list"  @click="clickLog()">
+					<view class="uni-media-list-logo">
+						<image src="https://kjxcx.kejicloud.cn/gxsti/images/20190827/1.jpg"  mode="aspectFit" class="cover_image"></image>
+					</view>
+					<view class="uni-media-list-body">
+						<view class="uni-media-list-text-top">出勤情况</view>
+						<view class="tag">
+							<uni-tag :mark="true" text="请假" type="primary" size="small" class="tag_node"/>
+							<uni-tag :mark="true" text="在邕" type="primary" size="small" class="tag_node"/>
+							<uni-tag :mark="true" text="出差" type="primary" size="small" class="tag_node"/>
+						</view>
+					</view>
+				</view>
+			</view>
+			
 			<view class="uni-list-cell" hover-class="uni-list-cell-hover" v-for="(item,key) in displayList" :key="key">
-				<view class="uni-media-list"  @click="clickArticle(key)">
+				<view class="uni-media-list"  @click="clickArticle(item.url,item.title,item.cover)">
 					<view class="uni-media-list-logo">
 						<!-- {{item,.img}} -->
 						<image v-if="showImg" :src="item.cover"  mode="aspectFit" class="cover_image"></image>

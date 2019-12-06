@@ -67,36 +67,12 @@ var ACCOUNT = [
 		
 		onLoad(){
 			GP = this
-			this.checkLoginStatus()
 			// this.checkStatus()
 			// this.getCode()
 			// this.test()
 		},
         methods: {
-			
-		
-			
-			/**
-			 * @method 检测登陆状态
-			 * @return
-			 * 		true 已登录，跳转x_detail
-			 * 		fasle 保持现有页面
-			 */
-			checkLoginStatus(){							
-				var username = uni.getStorageSync(this.$db.KEY_USERNAME) || ""
-				var password = uni.getStorageSync(this.$db.KEY_PASSWORD) || ""				
-				this.$db.login({
-					accout:username,
-					password:password,
-				}).then(res=>{
-					console.log(res)
-					if(res.code == 0){
-						uni.redirectTo({
-							url:"/pages/index/index"						
-						})
-					}
-				})
-			},
+				
 						
 			/**
 			 * @method 登陆表单submit

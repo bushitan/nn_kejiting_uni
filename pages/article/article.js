@@ -23,11 +23,14 @@ export default {
 	
 	onShareAppMessage(res) {
 		console.log(this.$data.url ,this.$data.title )
+		
+		var url = encodeURIComponent(this.$data.url)
+		var cover = encodeURIComponent(this.$data.cover)
 	    return {
 	      title: this.$data.title,
 		  // imageUrl:"/static/cover/share.jpg",
 		  imageUrl:this.$data.cover,
-	      path: '/pages/index/index?is_share=1&url=' + this.$data.url + "&title=" + this.$data.title + "&cover=" + this.$data.cover 
+	      path: '/pages/route/route?is_share=1&url=' +url + "&title=" + this.$data.title + "&cover=" + cover
 	    }
 	},
 	
@@ -37,10 +40,12 @@ export default {
 		
 		// this.data.url = options.url
 		// this.$set(this.$data,url,options.url)
+		var url = decodeURIComponent(options.url)
+		var cover = decodeURIComponent(options.cover)
 		this.setData({
-			url:options.url,
+			url:url,
 			title: options.title,
-			cover:options.cover
+			cover:cover
 		})
 		
 		uni.setNavigationBarTitle({

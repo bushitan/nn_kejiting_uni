@@ -72,7 +72,7 @@ class db{
     // 1 用户登录认证
     login(obj) {
         return new Promise((resolve, reject) => {
-			this.baseURL( this.HOST_DIAO + "api/employee/login/", obj ,"POST" )
+			this.baseURL( this.HOST_DIAO + "api/employee/login/?accout=" + obj.accout + "&password=" + obj.password, {} ,"POST" )
 			.then(res => resolve( res.data ))
 			.catch(res => reject(res.data))
         })
@@ -106,6 +106,14 @@ class db{
         })
     }
 	
+	// 3 首页信息获取
+	getMainInfo(obj) {
+	    return new Promise((resolve, reject) => {
+			this.baseURL( "http://121.31.6.5:9980/wx/push/list/", obj ,"POST" )
+			.then(res => resolve( res.data ))
+			.catch(res => reject(res.data))
+	    })
+	}
 	
 }
 module.exports = new db()
