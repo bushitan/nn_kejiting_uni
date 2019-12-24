@@ -29,8 +29,8 @@
 						<view class="col">处室/单位职务</view>
 						<view class="col">姓名</view>
 						<view class="col">是否在邕</view>
+						<view class="col">去向</view>
 						<view class="col">请假类型/去向</view>
-						<view class="col">出差去向</view>
 					</view>					
 					<!-- businessTrip_7: ""
 					dep_2: "厅领导"
@@ -44,7 +44,9 @@
 						<view class="col">{{item.dep_2}}</view>
 						<view class="col">{{item.name_3}}</view>
 						<view class="col">{{item.isInnn_4 ? "是":"否"}}</view>
-						<view class="col">{{item.leaveType_5 == -1 ? "":item.leaveType_5 }}</view>
+						<view class="col" v-if="item.leaveType_5==0">请假</view>
+						<view class="col" v-else-if="item.leaveType_5==1">出差</view>
+						<view class="col" v-else></view>
 						<view class="col">{{item.leaveDesc_6}}</view>
 					</view>
 					<view class="none" v-if="logList.length==0">
